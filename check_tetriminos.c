@@ -6,7 +6,7 @@
 /*   By: alcaroff <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 04:30:17 by alcaroff          #+#    #+#             */
-/*   Updated: 2017/11/19 05:59:29 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/19 12:51:20 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,23 @@ static int	sidehash(char **tab, int i, int j)
 {
 	if (i > 0 && tab[i - 1][j] == '#')
 		return(1);
-	if (i < 3 && tab[i + 1][j] == '#')	
+	else if (i < 3 && tab[i + 1][j] == '#')	
 		return(1);
-	if (j > 0 && tab[i][j - 1] == '#')
+	else if (j > 0 && tab[i][j - 1] == '#')
 		return(1);
-	if (j < 3 && tab[i][j + 1] == '#')
+	else if (j < 3 && tab[i][j + 1] == '#')
 		return(1);
 	return (0);
+}
+
+static void	cleanup(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while(tab[i])
+		free(tab[i++]);
+	free(tab);
 }
 
 static int	test_chars(char *buf)
@@ -64,6 +74,8 @@ static int	test_chars(char *buf)
 		}
 		i++;
 	}
+	printf("OK\n");
+	cleanup(tab);
 	return (1);
 }
 
@@ -84,6 +96,5 @@ int			check_tetriminos(char *av)
 		if (!test_chars(buf))
 			return (0);
 	}
-	printf("OK\n");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ede-la-v <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 19:19:37 by ede-la-v          #+#    #+#             */
-/*   Updated: 2017/11/19 06:10:37 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/19 13:23:07 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 int		main(int ac, char **av)
 {
+	t_tetri		*lst;
+
+	lst = NULL;
 	if (ac != 2)
 	{
 		ft_putstr("usage: ..\n");
@@ -30,6 +33,21 @@ int		main(int ac, char **av)
 	if (!check_tetriminos(av[1]))
 		ft_putstr("error\n");
 	else
-		;// creer les tetris
+		lst = create_tetriminos(av[1]);
+
+	// TESTS
+	/*int		i = 0;
+	while(lst)
+	{
+		printf("c : %c\n", lst->c);
+		while(i < 4)
+		{
+			printf("%d : %d %d\n", i, lst->point[i].y, lst->point[i].x);
+			i++;
+		}
+		lst = lst->next;
+	}*/
+	// END TESTS
+	
 	return (0);
 }
