@@ -6,7 +6,7 @@
 #    By: alcaroff <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 15:15:20 by alcaroff          #+#    #+#              #
-#    Updated: 2017/11/18 10:10:01 by alcaroff         ###   ########.fr        #
+#    Updated: 2017/11/19 04:28:13 by alcaroff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,12 @@ NAME	=	fillit
 FLAGS	=	-Wall -Werror -Wextra
 SRC		=	$(wildcard *.c)
 OBJ		=	$(SRC:.c=.o)
+LIBFT	=	../libft/libft.a
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc $< -o $(NAME) $(FLAGS) 
+	gcc $(OBJ) $(LIBFT) -o $(NAME) $(FLAGS) 
 
 %.o: %.c
 	gcc -c $< -o $@ $(FLAGS)
@@ -31,4 +32,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all $(NAME) %.o clean fclean re
+f: all clean
+	./fillit ex_fillit
