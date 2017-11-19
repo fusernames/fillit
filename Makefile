@@ -6,7 +6,7 @@
 #    By: alcaroff <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 15:15:20 by alcaroff          #+#    #+#              #
-#    Updated: 2017/11/19 04:28:13 by alcaroff         ###   ########.fr        #
+#    Updated: 2017/11/19 09:43:35 by alcaroff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	fillit
 FLAGS	=	-Wall -Werror -Wextra
 SRC		=	$(wildcard *.c)
 OBJ		=	$(SRC:.c=.o)
-LIBFT	=	../libft/libft.a
+LIBFT	=	libft.a
 
 all: $(NAME)
 

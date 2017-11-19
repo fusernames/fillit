@@ -6,14 +6,14 @@
 /*   By: ede-la-v <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 19:24:30 by ede-la-v          #+#    #+#             */
-/*   Updated: 2017/11/19 07:11:50 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/19 09:45:18 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_FILLIT_H
 # define FT_FILLIT_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include <stdlib.h>
 # include <fcntl.h>
 # include <sys/types.h>
