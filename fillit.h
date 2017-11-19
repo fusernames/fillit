@@ -6,7 +6,7 @@
 /*   By: ede-la-v <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 19:24:30 by ede-la-v          #+#    #+#             */
-/*   Updated: 2017/11/19 09:45:18 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/19 10:25:35 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ typedef struct 	s_point
 
 typedef struct	s_tetri
 {
-	char		c;
-	t_point		point[4];
-	t_tetri		*next;
-}				t_tetri t_list;
+	char			c;
+	t_point			point[4];
+	struct s_tetri	*next;
+}				t_tetri;
 
 int				check_tetriminos(char *av);
-t_tetri			create_tetriminos(char *av);
+t_tetri			*create_tetriminos(char *av);
 
 #endif
