@@ -6,7 +6,7 @@
 /*   By: ede-la-v <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 19:19:37 by ede-la-v          #+#    #+#             */
-/*   Updated: 2017/11/20 09:21:25 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/20 10:05:29 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,19 @@
 ** 4. afficher le resultat
 */
 
-void	cleanup(char **tab)
+int			ft_sqrt(int nb)
+{
+	int i;
+
+	i = 2;
+	while (i * i < nb)
+		i++;
+	ft_putnbr(i);
+	return (i);
+
+}
+
+void		cleanup(char **tab)
 {
 	int		i;
 
@@ -30,7 +42,7 @@ void	cleanup(char **tab)
 	free(tab);
 }
 
-char	**create_tab(int size)
+static char	**create_tab(int size)
 {
 	char	**tab;
 	int		i = 0;
@@ -53,7 +65,7 @@ char	**create_tab(int size)
 	return (tab);
 }
 
-void	print_tab(char **tab, int size)
+static void	print_tab(char **tab, int size)
 {
 	int		i;
 	int		j;
@@ -72,7 +84,7 @@ void	print_tab(char **tab, int size)
 	}
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_tetri		*lst;
 	char		**tab;
@@ -80,8 +92,7 @@ int		main(int ac, char **av)
 	int			nb_tetriminos;
 
 	nb_tetriminos = 0;
-	size = 4;
-	tab = create_tab(30);
+	tab = create_tab(40);
 	lst = NULL;
 	if (ac != 2)
 	{
@@ -90,6 +101,7 @@ int		main(int ac, char **av)
 	}
 	if ((nb_tetriminos = check_tetriminos(av[1])))
 	{
+		size = ft_sqrt(nb_tetriminos * 4);
 		lst = create_tetriminos(av[1]);
 		while (!place_tetriminos(tab, &lst, 'A', size))
 			size++;
