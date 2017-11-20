@@ -6,7 +6,7 @@
 /*   By: alcaroff <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 04:44:47 by alcaroff          #+#    #+#             */
-/*   Updated: 2017/11/20 09:12:14 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/20 12:04:24 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int		check_space(t_tetri *lst, char **tab, int i, int j, int size)
 	int		nb;
 
 	size--;
-	nb = 0;
+	nb = 1;
 	while (nb < 4)
-	{
+	{	
 		if (i + lst->point[nb].y > size || j + lst->point[nb].x > size)
 			return (0);
 		if (tab[i + lst->point[nb].y][j + lst->point[nb].x] != '.')
