@@ -6,7 +6,7 @@
 /*   By: ede-la-v <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 19:24:30 by ede-la-v          #+#    #+#             */
-/*   Updated: 2017/11/19 10:25:35 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:23:36 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <unistd.h>
-/* printf */
-# include <stdio.h>
 
-typedef struct 	s_point
+typedef struct	s_point
 {
 	int			x;
 	int			y;
@@ -35,7 +33,9 @@ typedef struct	s_tetri
 	struct s_tetri	*next;
 }				t_tetri;
 
+void			cleanup(char **tab);
 int				check_tetriminos(char *av);
 t_tetri			*create_tetriminos(char *av);
+int				place_tetriminos(char **tab, t_tetri **tetris, char c, int size);
 
 #endif

@@ -6,16 +6,16 @@
 /*   By: alcaroff <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 04:30:17 by alcaroff          #+#    #+#             */
-/*   Updated: 2017/11/19 12:51:20 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:22:23 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
- * CHECK_TERTRIMINOS
- * lance tous les tests sur le buf et retourne 1 si tout est valide
- */
+** CHECK_TERTRIMINOS
+** lance tous les tests sur le buf et retourne 1 si tout est valide
+*/
 
 static int	test_nb_lines(char *buf)
 {
@@ -31,24 +31,14 @@ static int	test_nb_lines(char *buf)
 static int	sidehash(char **tab, int i, int j)
 {
 	if (i > 0 && tab[i - 1][j] == '#')
-		return(1);
-	else if (i < 3 && tab[i + 1][j] == '#')	
-		return(1);
+		return (1);
+	else if (i < 3 && tab[i + 1][j] == '#')
+		return (1);
 	else if (j > 0 && tab[i][j - 1] == '#')
-		return(1);
+		return (1);
 	else if (j < 3 && tab[i][j + 1] == '#')
-		return(1);
+		return (1);
 	return (0);
-}
-
-static void	cleanup(char **tab)
-{
-	int		i;
-
-	i = 0;
-	while(tab[i])
-		free(tab[i++]);
-	free(tab);
 }
 
 static int	test_chars(char *buf)
@@ -74,7 +64,6 @@ static int	test_chars(char *buf)
 		}
 		i++;
 	}
-	printf("OK\n");
 	cleanup(tab);
 	return (1);
 }
@@ -84,7 +73,9 @@ int			check_tetriminos(char *av)
 	int		fd;
 	char	buf[22];
 	int		ret;
+	int		nb_tetriminos;
 
+	nb_tetriminos = 0;
 	fd = open(av, O_RDONLY);
 	if (fd == 1)
 		return (0);
@@ -95,6 +86,7 @@ int			check_tetriminos(char *av)
 			return (0);
 		if (!test_chars(buf))
 			return (0);
+		nb_tetriminos++;
 	}
-	return (1);
+	return (nb_tetriminos);
 }
