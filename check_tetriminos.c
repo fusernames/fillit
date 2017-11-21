@@ -6,7 +6,7 @@
 /*   By: alcaroff <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 04:30:17 by alcaroff          #+#    #+#             */
-/*   Updated: 2017/11/21 06:47:04 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/21 07:30:48 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** CHECK_TERTRIMINOS
-** lance tous les tests sur le buf et retourne 1 si tout est valide
+** lance tous les tests sur le buf et return nb tetriminos si tout est valide
 */
 
 static int	test_nb_lines(char *buf)
