@@ -6,7 +6,7 @@
 /*   By: alcaroff <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 04:30:17 by alcaroff          #+#    #+#             */
-/*   Updated: 2017/11/20 10:55:20 by alcaroff         ###   ########.fr       */
+/*   Updated: 2017/11/21 06:47:04 by alcaroff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,45 @@
 static int	test_nb_lines(char *buf)
 {
 	int i;
+	int count_line;
+	int count_point;
+	int count_hash;
 
+	count_line = 0;
+	count_point = 0;
+	count_hash = 0;
 	i = 0;
-	while (buf[i++])
-		if ((i + 1) % 5 == 0 && buf[i] != '\n')
-			return (0);
-	return (1);
+	while (i < 20)
+	{
+		if (buf[i] == '\n')
+			count_line++;
+		if (buf[i] == '.')
+			count_point++;
+		if (buf[i] == '#')
+			count_hash++;
+		i++;
+	}
+	if (count_line != 4 || count_hash != 4 || count_point != 12)
+		return (0);
+	if (buf[20] == '\n')
+		count_line++;
+	return (count_line);
 }
 
 static int	sidehash(char **tab, int i, int j)
 {
-	if (i > 0 && tab[i - 1][j] == '#')
-		return (1);
-	else if (i < 3 && tab[i + 1][j] == '#')
-		return (1);
-	else if (j > 0 && tab[i][j - 1] == '#')
-		return (1);
-	else if (j < 3 && tab[i][j + 1] == '#')
-		return (1);
-	return (0);
+	int count_sidehash;
+
+	count_sidehash = 0;
+	if (i + 1 < 4 && tab[i + 1][j] == '#')
+		count_sidehash++;
+	if (i - 1 > -1 && tab[i - 1][j] == '#')
+		count_sidehash++;
+	if (j + 1 < 5 && tab[i][j + 1] == '#')
+		count_sidehash++;
+	if (j - 1 > -1 && tab[i][j - 1] == '#')
+		count_sidehash++;
+	return (count_sidehash);
 }
 
 static int	test_chars(char *buf)
@@ -46,8 +66,10 @@ static int	test_chars(char *buf)
 	char	**tab;
 	int		i;
 	int		j;
+	int		count_sidehash;
 
 	i = 0;
+	count_sidehash = 0;
 	tab = ft_strsplit(buf, '\n');
 	if (ft_charoc(buf, '#') != 4)
 		return (0);
@@ -56,14 +78,14 @@ static int	test_chars(char *buf)
 		j = 0;
 		while (tab[i][j])
 		{
-			if (tab[i][j] != '.' && tab[i][j] != '#')
-				return (0);
-			if (tab[i][j] == '#' && !sidehash(tab, i, j))
-				return (0);
+			if (tab[i][j] == '#')
+				count_sidehash += sidehash(tab, i, j);
 			j++;
 		}
 		i++;
 	}
+	if (count_sidehash < 6)
+		return (0);
 	cleanup(tab);
 	return (1);
 }
@@ -74,8 +96,10 @@ int			check_tetriminos(char *av)
 	char	buf[22];
 	int		ret;
 	int		nb_tetriminos;
+	int		backslach_n;
 
 	nb_tetriminos = 0;
+	backslach_n = 0;
 	fd = open(av, O_RDONLY);
 	if (fd == 1)
 		return (0);
@@ -84,9 +108,13 @@ int			check_tetriminos(char *av)
 		buf[ret] = '\0';
 		if (!test_nb_lines(buf))
 			return (0);
+		else
+			backslach_n += test_nb_lines(buf);
 		if (!test_chars(buf))
 			return (0);
 		nb_tetriminos++;
 	}
+	if (backslach_n - nb_tetriminos * 4 != nb_tetriminos - 1)
+		return (0);
 	return (nb_tetriminos);
 }

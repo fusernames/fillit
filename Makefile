@@ -6,31 +6,32 @@
 #    By: alcaroff <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 15:15:20 by alcaroff          #+#    #+#              #
-#    Updated: 2017/11/19 09:43:35 by alcaroff         ###   ########.fr        #
+#    Updated: 2017/11/21 06:34:22 by alcaroff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	fillit
 FLAGS	=	-Wall -Werror -Wextra
-SRC		=	$(wildcard *.c)
+SRC		=	main.c check_tetriminos.c create_tetriminos.c resolve.c functions.c
 OBJ		=	$(SRC:.c=.o)
 LIBFT	=	libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	gcc $(OBJ) $(LIBFT) -o $(NAME) $(FLAGS) 
+$(NAME): $(OBJ) $(LIBFT)
+	@gcc $(OBJ) $(LIBFT) -o $(NAME) $(FLAGS) 
 
 %.o: %.c
-	gcc -c $< -o $@ $(FLAGS)
+	@gcc -c $< -o $@ $(FLAGS)
+
+$(LIBFT):
+	@cd libft && $(MAKE)
 
 clean:
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ) && cd libft && $(MAKE) clean
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME) && cd libft && $(MAKE) fclean
+
 
 re: fclean all
-
-f: all clean
-	./fillit ex_fillit
